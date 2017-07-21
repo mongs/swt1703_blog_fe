@@ -32,7 +32,7 @@
         </div>
         <div id="log-yes" style="display: none;">
             <span id="email"></span>
-            <a href="" class="am-btn am-btn-danger am-radius">退出登录</a>
+            <a href="http://localhost:3000/user/logout"  class="am-btn am-btn-danger am-radius">退出登录</a>
         </div>
     </div>
 </header>
@@ -350,9 +350,22 @@
     function init(){
         $.ajax({
             url: baseUrl + "/api",
+            xhrFields: {
+                withCredentials: true
+            },
             success: function(res){
                 let types = '';
                 let articles = ''
+                let email = res.email || '';
+                if(email){
+                    $('#log-no').hide();
+                    $('#email').text(email)
+                    $('#log-yes').show()
+                }else{
+                    $('#log-yes').hide()
+                    $('#email').text(email)
+                    $('#log-no').show();
+                }
                 $.each(res.types,function(index,item){
                     types += `<li><a>${item}</a></li>`
                 })

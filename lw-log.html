@@ -44,7 +44,7 @@
       <h1><a href="/">Amaze UI</a> </h1>
   </div>    
   <div class="log-re">
-    <button type="button" class="am-btn am-btn-default am-radius log-button">注册</button>
+    <a href="lw-re.html" class="am-btn am-btn-default am-radius log-button">注册</a>
   </div> 
 </header>
 
@@ -100,11 +100,17 @@
     url: baseUrl + 'user/login',
     type: 'POST',
     data: $('form').serialize(),
+    xhrFields: {
+      withCredentials: true
+    },
     success: function(res){
       alert(res.msg)
       if(res.status == 0){
         location.href = "lw-index.html"
       }
+    },
+    error:function(err){
+      console.log(err)
     }
    })
  })
